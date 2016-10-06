@@ -38,6 +38,19 @@
     - "{{ tmux_users }}"
     -  [
     { template: "{{ tmux_conf_template }}", dest: "{{ tmux_conf_file }}" },
+    ]
+  tags:
+    - "tmux"
+    - "tmux_conf"
+
+- name: clean up tmux configuration
+  file: >
+    path="~{{ item[0] }}/{{ item[1]['dest'] }}"
+    state=absent
+  become: no
+  with_nested:
+    - "{{ tmux_users }}"
+    -  [
     { template: "tmux_20.conf", dest: "{{ tmux_conf_dir }}/tmux_20.conf" },
     { template: "tmux_21.conf", dest: "{{ tmux_conf_dir }}/tmux_21.conf" }
     ]
