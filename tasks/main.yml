@@ -21,7 +21,7 @@
 # Set up configuration file
 - name: create tmux configuration directory
   file: >
-    dest="~{{ item }}/{{ tmux_conf_dir}}"
+    dest="~{{ item }}/{{ tmux_conf_dir }}"
     state=directory
   become: no
   with_items: "{{ tmux_users }}"
@@ -61,7 +61,7 @@
 # Set up plugin directory
 - name: create tmux plugin directory
   file: >
-    dest="~{{ item }}/{{ tmux_plugin_dir}}"
+    dest="~{{ item }}/{{ tmux_plugin_dir }}"
     state=directory
   become: no
   with_items: "{{ tmux_users }}"
