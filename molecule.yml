@@ -27,8 +27,8 @@ docker:
         ansible_groups:
           - test
 
-ansible:
-  requirements_file: dependencies.yml
+galaxy:
+  requirements: dependencies.yml
 
 verifier:
   name: testinfra
