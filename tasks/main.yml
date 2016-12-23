@@ -82,3 +82,15 @@
   tags:
     - "tmux"
     - "tmux_conf"
+
+# Install tmux-vim-select-pane
+# see https://gist.githubusercontent.com/mislav/5189704/raw/install.sh
+- name: install vim navigation integration
+  get_url:
+    url: https://raw.githubusercontent.com/mislav/dotfiles/master/bin/tmux-vim-select-pane
+    dest: /usr/local/bin/tmux-vim-select-pane
+    mode: 0755
+  become: yes
+  tags:
+    - "tmux"
+    - "tmux_conf"
