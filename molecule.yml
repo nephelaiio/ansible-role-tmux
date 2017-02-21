@@ -1,34 +1,38 @@
+# vim: ts=2 sw=2 et :
 ---
 driver:
   name: docker
 
 docker:
   containers:
-      - name: ansible-tmux-jessie
-        image: debian
-        image_version: jessie
-        ansible_groups:
-          - test
-      - name: ansible-tmux-xenial
-        image: ubuntu
-        image_version: xenial
-        ansible_groups:
-          - test
-      - name: ansible-tmux-centos7
-        image: centos
-        image_version: 7
-        ansible_groups:
-          - test
-      - name: ansible-tmux-arch
-        image: pritunl/archlinux
-        image_version: latest
-        dockerfile: docker/arch.dockerfile
-        command: /bin/bash
-        ansible_groups:
-          - test
+    - name: ansible-tmux-jessie
+      image: debian
+      image_version: jessie
+      ansible_groups:
+        - test
+    - name: ansible-tmux-xenial
+      image: ubuntu
+      image_version: xenial
+      ansible_groups:
+        - test
+    - name: ansible-tmux-centos7
+      image: centos
+      image_version: 7
+      ansible_groups:
+        - test
+    - name: ansible-tmux-arch
+      image: pritunl/archlinux
+      image_version: latest
+      dockerfile: docker/arch.dockerfile
+      command: /bin/bash
+      ansible_groups:
+        - test
 
-ansible:
+dependency:
   requirements_file: dependencies.yml
+  name: galaxy
 
 verifier:
   name: testinfra
+  options:
+    ignore: roles
