@@ -21,7 +21,7 @@
 # Set up configuration file
 - name: create tmux configuration directory
   file: >
-    dest="~{{ item }}/{{ tmux_conf_dir}}"
+    dest="~{{ item }}/{{ tmux_conf_dir }}"
     state=directory
   become: no
   with_items: "{{ tmux_users }}"
@@ -61,7 +61,7 @@
 # Set up plugin directory
 - name: create tmux plugin directory
   file: >
-    dest="~{{ item }}/{{ tmux_plugin_dir}}"
+    dest="~{{ item }}/{{ tmux_plugin_dir }}"
     state=directory
   become: no
   with_items: "{{ tmux_users }}"
@@ -79,6 +79,18 @@
   with_nested:
     - "{{ tmux_users }}"
     - "{{ tmux_plugins }}"
+  tags:
+    - "tmux"
+    - "tmux_conf"
+
+# Install tmux-vim-select-pane
+# see https://gist.githubusercontent.com/mislav/5189704/raw/install.sh
+- name: install vim navigation integration
+  get_url:
+    url: https://raw.githubusercontent.com/mislav/dotfiles/master/bin/tmux-vim-select-pane
+    dest: /usr/local/bin/tmux-vim-select-pane
+    mode: 0755
+  become: yes
   tags:
     - "tmux"
     - "tmux_conf"
