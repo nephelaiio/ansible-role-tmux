@@ -1,9 +1,16 @@
 ---
 - hosts: all
   pre_tasks:
+    - name: "updating arch keyring"
+      package:
+        name: archlinux-keyring
+        state: latest
+      when: ansible_os_family == 'Archlinux'
     - name: "installing testing packages"
       package:
-        name: which,wget
+        name:
+          - which
+          - wget
         state: installed
       when: ansible_os_family != 'Debian'
     - name: "installing testing packages"
