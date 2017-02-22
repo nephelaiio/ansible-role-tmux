@@ -6,6 +6,8 @@
         name: archlinux-keyring
         state: latest
       when: ansible_os_family == 'Archlinux'
+      tags:
+        - skip_ansible_lint
     - name: "installing testing packages"
       package:
         name:
