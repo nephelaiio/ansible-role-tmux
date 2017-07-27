@@ -21,10 +21,8 @@
 # Set up configuration file
 - name: create tmux configuration directory
   file: >
-    dest="~{{ item }}/{{ tmux_conf_dir }}"
+    dest="~/{{ tmux_conf_dir }}"
     state=directory
-  become: no
-  with_items: "{{ tmux_users }}"
   tags:
     - "tmux"
     - "tmux_conf"
@@ -33,7 +31,6 @@
   template: >
     src="{{ item[1]['template'] }}"
     dest="~{{ item[0] }}/{{ item[1]['dest'] }}"
-  become: no
   with_nested:
     - "{{ tmux_users }}"
     -  [
@@ -47,7 +44,6 @@
   file: >
     path="~{{ item[0] }}/{{ item[1]['dest'] }}"
     state=absent
-  become: no
   with_nested:
     - "{{ tmux_users }}"
     -  [
@@ -60,10 +56,9 @@
 
 # Set up plugin directory
 - name: create tmux plugin directory
-  file: >
-    dest="~{{ item }}/{{ tmux_plugin_dir }}"
-    state=directory
-  become: no
+  file:
+    dest: "~{{ item }}/{{ tmux_plugin_dir }}"
+    state: directory
   with_items: "{{ tmux_users }}"
   tags:
     - "tmux"
@@ -71,26 +66,13 @@
 
 # Install plugins
 - name: install plugins
-  git: >
-    repo="{{ item[1]['repo'] }}"
-    dest="~{{ item[0] }}/{{ tmux_plugin_dir }}/{{ item[1]['name'] }}"
-    version="{{ item[1]['version'] }}"
-  become: no
-  with_nested:
-    - "{{ tmux_users }}"
+  git:
+    repo: "{{ item['repo'] }}"
+    dest: "~/{{ tmux_plugin_dir }}/{{ item['name'] }}"
+    version: "{{ item['version'] }}"
+    force: yes
+  with_items:
     - "{{ tmux_plugins }}"
-  tags:
-    - "tmux"
-    - "tmux_conf"
-
-# Install tmux-vim-select-pane
-# see https://gist.githubusercontent.com/mislav/5189704/raw/install.sh
-- name: install vim navigation integration
-  get_url:
-    url: https://raw.githubusercontent.com/mislav/dotfiles/master/bin/tmux-vim-select-pane
-    dest: /usr/local/bin/tmux-vim-select-pane
-    mode: 0755
-  become: yes
   tags:
     - "tmux"
     - "tmux_conf"

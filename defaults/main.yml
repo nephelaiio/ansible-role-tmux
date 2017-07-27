@@ -2,9 +2,6 @@
 # User variables for role
 tmux_packages: tmux
 
-tmux_users:
-  - "{{ ansible_user }}"
-
 tmux_packages_state: present
 
 tmux_plugin_dir: .tmux/plugins
