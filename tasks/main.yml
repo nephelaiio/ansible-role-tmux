@@ -49,7 +49,7 @@
 # Set up plugin directory
 - name: create tmux plugin directory
   file:
-    dest: "/{{ tmux_plugin_dir }}"
+    dest: "~/{{ tmux_plugin_dir }}"
     state: directory
   tags:
     - "tmux"
