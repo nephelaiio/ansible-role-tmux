@@ -1,61 +1,40 @@
 ---
-# Include variable definitions
-- name: "include variable overrides"
+- name: include variable overrides
   include_vars: "{{ item }}"
   with_first_found:
     - "vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
     - "vars/{{ ansible_distribution }}.yml"
     - "vars/{{ ansible_os_family }}.yml"
-  tags:
-    - tmux
 
-# Install packages
-- name: install tmux packages
+- name: install packages
   package:
     name: "{{ tmux_packages }}"
     state: "{{ tmux_packages_state }}"
   become: yes
-  tags:
-    - tmux
 
-# Set up configuration file
-- name: create tmux configuration directory
+- name: create configuration directory
   file:
     dest: "~/{{ tmux_conf_dir }}"
     state: directory
-  tags:
-    - "tmux"
-    - "tmux_conf"
 
-- name: configure tmux
+- name: manage configuration
   template:
     src: "{{ tmux_conf_template }}"
     dest: "~/{{ tmux_conf_file }}"
-  tags:
-    - "tmux"
-    - "tmux_conf"
 
-- name: clean up tmux configuration
+- name: managee configuration overrides
   file:
     path: "~/{{ item }}"
     state: absent
   with_items:
     - "{{ tmux_conf_dir }}/tmux_20.conf"
     - "{{ tmux_conf_dir }}/tmux_21.conf"
-  tags:
-    - "tmux"
-    - "tmux_conf"
 
-# Set up plugin directory
-- name: create tmux plugin directory
+- name: create plugin directory
   file:
     dest: "~/{{ tmux_plugin_dir }}"
     state: directory
-  tags:
-    - "tmux"
-    - "tmux_conf"
 
-# Install plugins
 - name: install plugins
   git:
     repo: "{{ item['repo'] }}"
@@ -64,6 +43,3 @@
     force: yes
   with_items:
     - "{{ tmux_plugins }}"
-  tags:
-    - "tmux"
-    - "tmux_conf"

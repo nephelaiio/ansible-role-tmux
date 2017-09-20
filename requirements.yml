@@ -1,3 +1,5 @@
 ---
 - src: nephelaiio.git
+  version: 1.0.1
 - src: nephelaiio.xclip
+  version: 1.0.1
