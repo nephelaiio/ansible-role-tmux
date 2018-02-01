@@ -1,2 +1,3 @@
 ---
-# Variable overrides and definitions for Arch and derivatives
+tmux_packages:
+  - tmux
