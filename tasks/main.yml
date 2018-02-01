@@ -8,7 +8,7 @@
 
 - name: install packages
   package:
-    name: "{{ tmux_packages }}"
+    name: "{{ tmux_packages | default(tmux_packages_default) }}"
     state: "{{ tmux_packages_state }}"
   become: yes
 
@@ -22,7 +22,7 @@
     src: "{{ tmux_conf_template }}"
     dest: "~/{{ tmux_conf_file }}"
 
-- name: managee configuration overrides
+- name: manage configuration overrides
   file:
     path: "~/{{ item }}"
     state: absent
