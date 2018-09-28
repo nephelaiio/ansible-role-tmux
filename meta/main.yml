@@ -22,6 +22,6 @@ galaxy_info:
 
 dependencies:
   - role: nephelaiio.git
-    version: 1.0.3
+    version: 2.0.0
   - role: nephelaiio.xclip
     version: 1.0.1
