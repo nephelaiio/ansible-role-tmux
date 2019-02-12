@@ -10,10 +10,12 @@ platforms:
     image: centos:7
   - name: ubuntu
     image: ubuntu:xenial
+  - name: ubuntu
+    image: ubuntu:bionic
   - name: debian
     image: debian:stretch
   - name: arch
-    image: base/archlinux:latest
+    image: archlinux/base:latest
 provisioner:
   name: ansible
   lint:
