@@ -20,7 +20,11 @@ Including an example of how to use your role (for instance, with variables passe
 
 ## Testing
 
-Role is tested against the following distributions (docker images):
+Please make sure your environment has [docker](https://www.docker.com) installed in order to run role validation tests. Additional python dependencies are listed in the [requirements file](https://github.com/nephelaiio/ansible-role-requirements/blob/master/requirements.txt)
+
+This role is tested against the following distributions:
+
+  * Ubuntu Bionic
   * Ubuntu Xenial
   * CentOS 7
   * Debian Stretch
