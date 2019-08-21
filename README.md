@@ -28,7 +28,6 @@ This role is tested against the following distributions:
   * Ubuntu Xenial
   * CentOS 7
   * Debian Stretch
-  * Arch Linux
 
 You can test the role directly from sources using command ` molecule test `
 
