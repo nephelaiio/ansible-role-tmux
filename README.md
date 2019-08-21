@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/nephelaiio/ansible-role-tmux.svg?branch=master)](https://travis-ci.org/nephelaiio/ansible-role-tmux)
 
-An [ansible role](https://galaxy.ansible.com/nephelaiio/tmux) to install and configure {tmux}(https://tmux.github.io)
+An [ansible role](https://galaxy.ansible.com/nephelaiio/tmux) to install and configure [tmux](https://tmux.github.io)
 
 ## Role Variables
 
