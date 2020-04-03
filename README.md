@@ -4,6 +4,14 @@
 
 An [ansible role](https://galaxy.ansible.com/nephelaiio/tmux) to install and configure [tmux](https://tmux.github.io)
 
+## Local install
+
+Execute the following from the command line shell
+
+```
+curl -s https://raw.githubusercontent.com/nephelaiio/ansible-role-tmux/master/install.sh | bash
+```
+
 ## Role Variables
 
 Please refer to the [defaults file](/defaults/main.yml) for an up to date list of input parameters.
