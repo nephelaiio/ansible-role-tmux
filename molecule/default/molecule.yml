@@ -18,3 +18,5 @@ provisioner:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 scenario:
   name: default
+verifier:
+  name: testinfra
