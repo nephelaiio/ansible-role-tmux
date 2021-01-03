@@ -18,6 +18,3 @@ provisioner:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 scenario:
   name: default
-  test_sequence:
-    - dependency
-    - syntax
