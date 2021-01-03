@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: tmux
   author: Ted Cook
   description: An Ansible role to install and configure tmux
   license: MIT
@@ -22,6 +23,4 @@ galaxy_info:
 
 dependencies:
   - role: nephelaiio.git
-    version: 2.1.0
   - role: nephelaiio.xclip
-    version: 2.1.0
