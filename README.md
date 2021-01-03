@@ -1,6 +1,7 @@
 # nephelaiio.tmux
 
-[![Build Status](https://travis-ci.org/nephelaiio/ansible-role-tmux.svg?branch=master)](https://travis-ci.org/nephelaiio/ansible-role-tmux)
+[![Build Status](https://github.com/nephelaiio/ansible-role-tmux/workflows/.github/workflows/main.yml/badge.svg)](https://travis-ci.org/nephelaiio/ansible-role-tmux)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-nephelaiio.tmux-blue.svg)](https://galaxy.ansible.com/nephelaiio/tmux/)
 
 An [ansible role](https://galaxy.ansible.com/nephelaiio/tmux) to install and configure [tmux](https://tmux.github.io)
 
@@ -32,10 +33,9 @@ Please make sure your environment has [docker](https://www.docker.com) installed
 
 This role is tested against the following distributions:
 
-  * Ubuntu Bionic
-  * Ubuntu Xenial
-  * CentOS 7
-  * Debian Stretch
+  * Ubuntu 20.04
+  * Ubuntu 18.04
+  * Debian 10
 
 You can test the role directly from sources using command ` molecule test `
 
