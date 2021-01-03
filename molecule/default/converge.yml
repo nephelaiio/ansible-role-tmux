@@ -7,4 +7,4 @@
         update_cache: yes
       when: (ansible_os_family | lower) == 'debian'
   roles:
-    - role: tmux
+    - role: nephelaiio.tmux

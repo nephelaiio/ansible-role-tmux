@@ -8,12 +8,12 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - 20.04
-        - 18.04
-        - 16.04
+        - focal
+        - bionic
+        - xenial
     - name: Debian
       versions:
-        - 10
+        - buster
   galaxy_tags:
     - tmux
 
