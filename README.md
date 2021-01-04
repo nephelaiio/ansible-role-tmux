@@ -1,6 +1,6 @@
 # nephelaiio.tmux
 
-[![Build Status](https://github.com/nephelaiio/ansible-role-tmux/workflows/.github/workflows/main.yml/badge.svg)](https://travis-ci.org/nephelaiio/ansible-role-tmux)
+[![Build Status](https://github.com/nephelaiio/ansible-role-tmux/workflows/CI/badge.svg)](https://github.com/nephelaiio/ansible-role-tmux/actions)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-nephelaiio.tmux-blue.svg)](https://galaxy.ansible.com/nephelaiio/tmux/)
 
 An [ansible role](https://galaxy.ansible.com/nephelaiio/tmux) to install and configure [tmux](https://tmux.github.io)
