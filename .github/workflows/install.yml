@@ -33,5 +33,5 @@ jobs:
       - name: Run local install
         run: bash install.sh
 
-      - name: Test docker binary
-        run: tmux --version
+      - name: Test tmux binary
+        run: tmux --help
