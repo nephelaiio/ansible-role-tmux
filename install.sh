@@ -61,9 +61,7 @@ else
     cp -a . "$tmpdir"
 fi
 pushd "$tmpdir/install"
-if [ -f ../requirements.yml ]; then
-    ansible-galaxy install -r ../requirements.yml --force
-fi
+ansible-galaxy role install nephelaiio.tmux
 ansible-playbook --become --connection=local -i inventory playbook.yml -t install
 ansible-playbook --connection=local -i inventory playbook.yml "${POSITIONAL[@]}"
 popd
