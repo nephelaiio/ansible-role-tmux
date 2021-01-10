@@ -1,5 +1,5 @@
 ---
-# tmux_packages: tmux
+tmux_packages: tmux
 tmux_packages_state: present
 tmux_plugin_dir: .tmux/plugins
 tmux_conf_template: tmux.conf
