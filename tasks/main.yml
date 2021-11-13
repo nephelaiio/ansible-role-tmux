@@ -17,6 +17,7 @@
   template:
     src: "{{ tmux_conf_template }}"
     dest: "~/{{ tmux_conf_file }}"
+    force: "{{ tmux_conf_force }}"
   tags:
     - configure
 
