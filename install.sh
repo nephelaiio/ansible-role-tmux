@@ -45,7 +45,7 @@ done
 # verify requirements
 requirements=(pipx git)
 for r in "${requirements[@]}"; do
-    if ! type -p "$r"; then
+    if ! type -p "$r" >/dev/null; then
         echo "$r executable not found in path, aborting"
         exit $KO
     fi
