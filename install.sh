@@ -43,7 +43,7 @@ do
 done
 
 # verify requirements
-requirements=(ansible-playbook git)
+requirements=(pipx git)
 for r in "${requirements[@]}"; do
     if ! type -p "$r"; then
         echo "$r executable not found in path, aborting"
@@ -61,9 +61,9 @@ else
     cp -a . "$tmpdir"
 fi
 pushd "$tmpdir/install"
-ansible-galaxy role install nephelaiio.tmux
-ansible-playbook --become --connection=local -i inventory playbook.yml -t install
-ansible-playbook --connection=local -i inventory playbook.yml "${POSITIONAL[@]}"
+pipx run --spec ansible ansible-galaxy role install nephelaiio.tmux
+pipx run --spec ansible ansible-playbook --become --connection=local -i inventory playbook.yml -t install
+pipx run --spec ansible ansible-playbook --connection=local -i inventory playbook.yml "${POSITIONAL[@]}"
 popd
 
 # purge temp files
