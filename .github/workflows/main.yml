@@ -36,7 +36,7 @@ jobs:
         run: poetry install
 
       - name: Lint code.
-        run: ansible-lint .
+        run: poetry run ansible-lint .
 
   molecule:
     name: Molecule
