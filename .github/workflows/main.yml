@@ -29,13 +29,14 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install test dependencies.
-        run: pip3 install yamllint ansible-lint ansible
+      - name: Install poetry
+        run: pip3 install poetry
+
+      - name: Install project dependencies
+        run: poetry install
 
       - name: Lint code.
-        run: |
-          yamllint .
-          ansible-lint .
+        run: ansible-lint .
 
   molecule:
     name: Molecule
@@ -43,11 +44,11 @@ jobs:
     strategy:
       matrix:
         image:
-          - geerlingguy/docker-ubuntu2004-ansible:latest
-          - geerlingguy/docker-ubuntu1804-ansible:latest
-          - geerlingguy/docker-ubuntu1604-ansible:latest
-          - geerlingguy/docker-debian10-ansible:latest
+          - ubuntu2204
+          - ubuntu2004
+          - debian11
     steps:
+
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
@@ -58,11 +59,17 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install poetry
+        run: pip3 install poetry
+
+      - name: Install project dependencies
+        run: poetry install
+
       - name: Install test dependencies.
         run: pip3 install ansible molecule[docker] docker pytest pytest-testinfra
 
       - name: Run Molecule tests.
-        run: molecule test
+        run: poetry run molecule test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'

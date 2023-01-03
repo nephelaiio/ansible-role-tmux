@@ -1,28 +1,28 @@
 ---
-- name: install packages
-  package:
+- name: Install packages
+  ansible.builtin.package:
     name: "{{ tmux_packages }}"
     state: "{{ tmux_packages_state }}"
   tags:
     - install
 
-- name: create configuration directory
-  file:
+- name: Create configuration directory
+  ansible.builtin.file:
     dest: "~/{{ tmux_conf_dir }}"
     state: directory
   tags:
     - configure
 
-- name: manage configuration
-  template:
+- name: Manage configuration
+  ansible.builtin.template:
     src: "{{ tmux_conf_template }}"
     dest: "~/{{ tmux_conf_file }}"
     force: "{{ tmux_conf_force }}"
   tags:
     - configure
 
-- name: manage configuration overrides
-  file:
+- name: Manage configuration overrides
+  ansible.builtin.file:
     path: "~/{{ item }}"
     state: absent
   with_items:
@@ -31,15 +31,15 @@
   tags:
     - configure
 
-- name: create plugin directory
-  file:
+- name: Create plugin directory
+  ansible.builtin.file:
     dest: "~/{{ tmux_plugin_dir }}"
     state: directory
   tags:
     - configure
 
-- name: install plugins
-  git:
+- name: Install plugins
+  ansible.builtin.git:
     repo: "{{ item['repo'] }}"
     dest: "~/{{ tmux_plugin_dir }}/{{ item['name'] }}"
     version: "{{ item['version'] }}"

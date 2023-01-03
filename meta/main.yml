@@ -5,7 +5,7 @@ galaxy_info:
   author: nephelaiio
   description: An Ansible role to install and configure tmux
   license: MIT
-  min_ansible_version: 2.2
+  min_ansible_version: "2.2"
   platforms:
     - name: Ubuntu
       versions:

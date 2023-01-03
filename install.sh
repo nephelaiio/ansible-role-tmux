@@ -43,7 +43,7 @@ do
 done
 
 # verify requirements
-requirements=(pipx git)
+requirements=(poetry git)
 for r in "${requirements[@]}"; do
     if ! type -p "$r" >/dev/null; then
         echo "$r executable not found in path, aborting"
@@ -61,10 +61,14 @@ else
     cp -a . "$tmpdir"
 fi
 pushd "$tmpdir/install"
-pipx inject ansible MarkupSafe==2.0.1 netaddr
-pipx run --spec ansible ansible-galaxy role install nephelaiio.tmux
-pipx run --spec ansible ansible-playbook --become --connection=local -i inventory playbook.yml -t install
-pipx run --spec ansible ansible-playbook --connection=local -i inventory playbook.yml "${POSITIONAL[@]}"
+POETRY=poetry
+if ! type poetry > /dev/null; then
+    POETRY="pipx run $POETRY"
+fi
+$POETRY install
+$POETRY run -- ansible-galaxy role install nephelaiio.tmux
+$POETRY run -- ansible-playbook --become --connection=local -i inventory playbook.yml -t install
+$POETRY run -- ansible-playbook --connection=local -i inventory playbook.yml "${POSITIONAL[@]}"
 popd
 
 # purge temp files

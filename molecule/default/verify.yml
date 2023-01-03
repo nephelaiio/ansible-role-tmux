@@ -1,0 +1,9 @@
+---
+- name: Verify
+
+  hosts: all
+
+  tasks:
+
+    - name: Verify tmux command
+      ansible.builtin.command: tmux -V
