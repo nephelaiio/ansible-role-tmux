@@ -27,7 +27,7 @@ With default configuration:
          - role: tmux
 ```
 
-With custom configuration
+With literal configuration
 
 ```
     - hosts: all
@@ -47,6 +47,7 @@ This role is tested against the following distributions:
   * Ubuntu 22.04
   * Ubuntu 20.04
   * Ubuntu 18.04
+  * Debian 11
   * Debian 10
 
 You can test the role directly from sources using command ` molecule test `
