@@ -3,48 +3,47 @@
   ansible.builtin.package:
     name: "{{ tmux_packages }}"
     state: "{{ tmux_packages_state }}"
-  tags:
-    - install
+  tags: install
 
-- name: Create configuration directory
-  ansible.builtin.file:
-    dest: "~/{{ tmux_conf_dir }}"
-    state: directory
-  tags:
-    - configure
+- name: Configure tmux
+  tags: configure
+  block:
 
-- name: Manage configuration
-  ansible.builtin.template:
-    src: "{{ tmux_conf_template }}"
-    dest: "~/{{ tmux_conf_file }}"
-    force: "{{ tmux_conf_force }}"
-  tags:
-    - configure
+    - name: Create configuration directory
+      ansible.builtin.file:
+        dest: "~/{{ tmux_conf_dir }}"
+        state: directory
 
-- name: Manage configuration overrides
-  ansible.builtin.file:
-    path: "~/{{ item }}"
-    state: absent
-  with_items:
-    - "{{ tmux_conf_dir }}/tmux_20.conf"
-    - "{{ tmux_conf_dir }}/tmux_21.conf"
-  tags:
-    - configure
+    - name: Manage configuration content
+      ansible.builtin.copy:
+        content: "{{ tmux_conf_literal }}"
+        dest: "{{ tmux_conf_file }}"
+      when: tmux_conf_literal is defined
 
-- name: Create plugin directory
-  ansible.builtin.file:
-    dest: "~/{{ tmux_plugin_dir }}"
-    state: directory
-  tags:
-    - configure
+    - name: Manage configuration template
+      ansible.builtin.template:
+        src: "{{ tmux_conf_template }}"
+        dest: "{{ tmux_conf_file }}"
+        force: "{{ tmux_conf_force }}"
+      when: tmux_conf_literal is not defined
 
-- name: Install plugins
-  ansible.builtin.git:
-    repo: "{{ item['repo'] }}"
-    dest: "~/{{ tmux_plugin_dir }}/{{ item['name'] }}"
-    version: "{{ item['version'] }}"
-    force: yes
-  with_items:
-    - "{{ tmux_plugins }}"
-  tags:
-    - configure
+    - name: Manage configuration overrides
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "{{ tmux_conf_dir }}/tmux_20.conf"
+        - "{{ tmux_conf_dir }}/tmux_21.conf"
+
+    - name: Create plugin directory
+      ansible.builtin.file:
+        dest: "{{ tmux_plugin_dir }}"
+        state: directory
+
+    - name: Install plugins
+      ansible.builtin.git:
+        repo: "{{ item['repo'] }}"
+        dest: "{{ tmux_plugin_dir }}/{{ item['name'] }}"
+        version: "{{ item['version'] }}"
+        force: yes
+      with_items: "{{ tmux_plugins }}"

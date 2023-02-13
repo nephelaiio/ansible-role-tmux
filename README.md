@@ -1,6 +1,6 @@
 # nephelaiio.tmux
 
-[![Build Status](https://github.com/nephelaiio/ansible-role-tmux/workflows/CI/badge.svg)](https://github.com/nephelaiio/ansible-role-tmux/actions)
+[![Build Status](https://github.com/nephelaiio/ansible-role-tmux/workflows/molecule/badge.svg)](https://github.com/nephelaiio/ansible-role-tmux/actions)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-nephelaiio.tmux-blue.svg)](https://galaxy.ansible.com/nephelaiio/tmux/)
 
 An [ansible role](https://galaxy.ansible.com/nephelaiio/tmux) to install and configure [tmux](https://tmux.github.io)
@@ -17,12 +17,23 @@ curl -s https://raw.githubusercontent.com/nephelaiio/ansible-role-tmux/master/in
 
 Please refer to the [defaults file](/defaults/main.yml) for an up to date list of input parameters.
 
-## Example Playbook
+## Example Playbooks
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+With default configuration:
 
 ```
-    - hosts: servers
+    - hosts: all
+      roles:
+         - role: tmux
+```
+
+With custom configuration
+
+```
+    - hosts: all
+      vars:
+        tmux_conf_literal: |
+          // tmux config content
       roles:
          - role: tmux
 ```
@@ -33,6 +44,7 @@ Please make sure your environment has [docker](https://www.docker.com) installed
 
 This role is tested against the following distributions:
 
+  * Ubuntu 22.04
   * Ubuntu 20.04
   * Ubuntu 18.04
   * Debian 10
