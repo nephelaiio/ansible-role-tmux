@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "nephelaiio-tmux"
+version = "0.1.0"
+description = ""
+authors = ["Ted Cook <teodoro.cook@gmail.com>"]
+readme = "README.md"
+packages = [{include = "nephelaiio"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+molecule = {extras = ["docker"], version = "^4.0.4"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

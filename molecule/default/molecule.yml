@@ -4,19 +4,35 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: instance
-    image: "${MOLECULE_DOCKER_IMAGE}"
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
+  - name: template
+    image: "geerlingguy/docker-${MOLECULE_DOCKER_IMAGE:-ubuntu2204}-ansible:latest"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
+    privileged: false
     pre_build_image: true
+    cgroupns_mode: private
+    groups:
+      - templates
+  - name: literal
+    image: "geerlingguy/docker-${MOLECULE_DOCKER_IMAGE:-ubuntu2204}-ansible:latest"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: false
+    pre_build_image: true
+    cgroupns_mode: private
+    groups:
+      - literals
 provisioner:
   name: ansible
   log: true
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  inventory:
+    group_vars:
+      all:
+        tmux_conf_file: "~/.tmux.conf"
+      literals:
+        tmux_conf_literal: |
+          # custom config
 scenario:
   name: default
 verifier:
-  name: testinfra
+  name: ansible
