@@ -5,5 +5,29 @@
 
   tasks:
 
-    - name: Verify tmux command
+    - name: verify tmux command
       ansible.builtin.command: tmux -V
+
+    - name: stat tmux config file
+      ansible.builtin.command: cat "{{ tmux_conf_file }}"
+      register: _tmux_config
+
+    - name: debug tmux config method
+      ansible.builtin.debug:
+        msg: "tmux configured from {{ _method }}"
+      vars:
+        _method: "{{ tmux_conf_literal is defined | ternary('literal', 'template') }}"
+
+    - name: verify tmux config from template
+      ansible.builtin.fail:
+        msg: "tmux config check from template has failed"
+      when:
+        - tmux_conf_literal is not defined
+        - (_tmux_config.stdout_lines | first) is not search("# Ansible managed")
+
+    - name: verify tmux config from literal
+      ansible.builtin.fail:
+        msg: "tmux config check from literal has failed"
+      when:
+        - tmux_conf_literal is defined
+        - _tmux_config.stdout != (tmux_conf_literal | regex_replace('\n$', ''))
